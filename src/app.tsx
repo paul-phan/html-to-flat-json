@@ -47,9 +47,9 @@ export const generateJSONDataFromDOM = (dom: HTMLElement) => {
 	const addChildren = (childNodes: NodeList) => {
 		let ids: any[] = [];
 		childNodes.forEach((node) => {
-			let childId = ++counter;
-			ids.push(childId);
 			if (node instanceof HTMLElement) {
+				let childId = ++counter;
+				ids.push(childId);
 				data.push({
 					id: childId,
 					type: node.tagName.toLowerCase(),
@@ -57,8 +57,13 @@ export const generateJSONDataFromDOM = (dom: HTMLElement) => {
 					children: addChildren(node.childNodes),
 				});
 			} else {
-				let text = node.nodeValue?.toString()?.trim();
+				let text = node.nodeValue
+					?.toString()
+					?.trim()
+					?.replaceAll(/\n\t/g, "");
 				if (text) {
+					let childId = ++counter;
+					ids.push(childId);
 					data.push({
 						id: childId,
 						type: "text",
