@@ -57,11 +57,14 @@ export const generateJSONDataFromDOM = (dom: HTMLElement) => {
 					children: addChildren(node.childNodes),
 				});
 			} else {
-				data.push({
-					id: childId,
-					type: "text",
-					value: node.nodeValue,
-				});
+				let text = node.nodeValue?.toString()?.trim();
+				if (text) {
+					data.push({
+						id: childId,
+						type: "text",
+						value: text,
+					});
+				}
 			}
 		});
 		return ids;
