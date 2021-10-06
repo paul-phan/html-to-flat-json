@@ -4,9 +4,7 @@ import { useState } from "react";
 export const createDOMFromString = (str: string) => {
 	var wrapper = document.createElement("div");
 	wrapper.innerHTML = str;
-	wrapper.style.display = "none";
-	document.body.appendChild(wrapper);
-	return wrapper.firstChild;
+	return wrapper;
 };
 export const extractElementAttributes = (element: HTMLElement) => {
 	let attrs = element.attributes;
